@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import { soundManager } from '../services/SoundManager';
 
+/**
+ * FloatingNav
+ * Clean tactile floating header and sound engine controls.
+ * Updated with Architecture and Timeline removed, reflecting the streamlined continuous journey.
+ */
 export default function FloatingNav({ progress, onNavigate }) {
   const [soundEnabled, setSoundEnabled] = useState(false);
 
@@ -11,11 +16,9 @@ export default function FloatingNav({ progress, onNavigate }) {
   };
 
   const navItems = [
-    { label: 'HERO', target: 0.12 },
+    { label: 'HERO', target: 0.10 },
     { label: 'PROJECTS', target: 0.38 },
-    { label: 'ARCHITECTURE', target: 0.65 },
     { label: 'STACK', target: 0.72 },
-    { label: 'TIMELINE', target: 0.82 },
     { label: 'CONTACT', target: 0.96 }
   ];
 
@@ -62,7 +65,7 @@ export default function FloatingNav({ progress, onNavigate }) {
         </span>
       </div>
 
-      {/* Center Nav items (Visible on desktop/tablet) */}
+      {/* Center Nav items */}
       <div
         style={{
           pointerEvents: 'auto',
@@ -78,7 +81,7 @@ export default function FloatingNav({ progress, onNavigate }) {
         className="nav-bar-center"
       >
         {navItems.map((item) => {
-          const isActive = Math.abs(progress - item.target) < 0.08;
+          const isActive = Math.abs(progress - item.target) < 0.12;
           return (
             <button
               key={item.label}
@@ -87,9 +90,9 @@ export default function FloatingNav({ progress, onNavigate }) {
               style={{
                 background: isActive ? 'var(--paper-cream)' : 'transparent',
                 border: isActive ? '1px solid var(--paper-border)' : '1px solid transparent',
-                padding: '4px 10px',
+                padding: '4px 12px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.72rem',
                 fontWeight: isActive ? 700 : 500,
                 color: isActive ? 'var(--ink-primary)' : 'var(--ink-secondary)',
                 cursor: 'pointer',

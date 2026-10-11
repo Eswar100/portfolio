@@ -27,6 +27,7 @@ export const PORTFOLIO_DATA = {
       category: "ENTERPRISE REST SERVICE",
       stack: ["Spring Boot", "REST API", "MySQL", "CRUD", "JPA/Hibernate"],
       tagline: "Scalable Task Orchestration & Management Engine",
+      image: "/assets/projects/task-manager.png",
       description: "A production-grade RESTful web service architected with Spring Boot and MySQL. Implements layered architecture, comprehensive CRUD operations, DTO validation, and automated transaction rollback handling.",
       architectureHighlight: "Layered Spring MVC with Hibernate second-level caching & HikariCP connection pooling.",
       endpoints: [
@@ -50,6 +51,7 @@ export const PORTFOLIO_DATA = {
       category: "FINANCIAL TRANSACTION ENGINE",
       stack: ["Java", "OOP", "Database-Driven", "Transactions", "ACID Compliance"],
       tagline: "High-Integrity Core Ledger & Account Transfer Platform",
+      image: "/assets/projects/banking-system.png",
       description: "A secure, database-driven financial application built on pure Object-Oriented principles in Java. Features strict ACID transaction isolation levels, ledger reconciliation, thread-safe concurrent account debits/credits, and cryptographic password hashing.",
       architectureHighlight: "Optimistic locking with row-level mutex locks preventing race conditions in high-throughput transfer queues.",
       endpoints: [
@@ -64,7 +66,7 @@ export const PORTFOLIO_DATA = {
       },
       github: "https://github.com",
       live: "https://demo.eswar.dev/banking",
-      accent: "#3a6048"
+      accent: "#2d5a3f"
     },
     {
       id: "youmate",
@@ -72,6 +74,7 @@ export const PORTFOLIO_DATA = {
       category: "MODERN WEB UTILITY SUITE",
       stack: ["Next.js", "TypeScript", "Web Utilities", "SEO", "Tailored API"],
       tagline: "High-Performance Content Tools & Developer Utilities",
+      image: "/assets/projects/youmate.png",
       description: "A fast, SEO-optimized web application built with Next.js and TypeScript. Delivers intuitive utilities with server-side rendering, sub-second TTFB, dynamic OpenGraph card generation, and streamlined workflow automation.",
       architectureHighlight: "Edge server caching with incremental static regeneration (ISR) and strict TypeScript type boundaries.",
       endpoints: [
@@ -89,58 +92,12 @@ export const PORTFOLIO_DATA = {
     }
   ],
 
-  backendArchitecture: {
-    title: "BACKEND ARCHITECTURE PIPELINE",
-    subtitle: "HOW REQUESTS FLOW THROUGH ESWAR'S SYSTEMS",
-    nodes: [
-      {
-        id: "client",
-        name: "CLIENT / CONSUMER",
-        type: "HTTP/2 & REST Requests",
-        annotation: "Incoming JSON / JWT payload",
-        details: "Single-Page Apps, Mobile clients, Third-party Webhooks",
-        specs: "TLS 1.3 • Keep-Alive • Gzip/Brotli"
-      },
-      {
-        id: "controller",
-        name: "CONTROLLER LAYER",
-        type: "Spring REST Controller",
-        annotation: "Request routing & DTO validation",
-        details: "Extracts URI parameters, performs @Valid checking, sanitizes inputs, enforces authorization interceptors.",
-        specs: "@RestController • Bean Validation • GlobalExceptionHandler"
-      },
-      {
-        id: "service",
-        name: "SERVICE LAYER",
-        type: "Business Logic & Orchestration",
-        annotation: "@Transactional Boundary",
-        details: "Executes business domain rules, calculates state mutations, handles multi-entity transactional integrity and rollback.",
-        specs: "@Service • Propagation.REQUIRED • Isolation.READ_COMMITTED"
-      },
-      {
-        id: "repository",
-        name: "DATA ACCESS (REPOSITORY)",
-        type: "Spring Data JPA / Hibernate",
-        annotation: "Object-Relational Mapping (ORM)",
-        details: "Constructs type-safe JPQL and native SQL queries, manages session persistence context, batches insert/update operations.",
-        specs: "HikariCP Pool • L2 Cache • PagingAndSortingRepository"
-      },
-      {
-        id: "database",
-        name: "DATABASE PERSISTENCE",
-        type: "MySQL Relational Engine",
-        annotation: "ACID Guaranteed Storage",
-        details: "InnoDB storage engine, B-Tree indexes, foreign key constraints, binary transaction logs, automated point-in-time recovery.",
-        specs: "InnoDB • UTF8MB4 • ACID Compliant • Indexed Queries"
-      }
-    ]
-  },
-
   techStack: [
     {
       name: "JAVA",
       category: "CORE RUNTIME",
       version: "Java 17 / 21 LTS",
+      logo: "/assets/tech/java.svg",
       details: "OOP, Streams API, Concurrency, JVM Internals, Garbage Collection tuning",
       annotation: "public static void main(String[] args)"
     },
@@ -148,77 +105,57 @@ export const PORTFOLIO_DATA = {
       name: "SPRING BOOT",
       category: "FRAMEWORK",
       version: "Spring Boot 3.x",
+      logo: "/assets/tech/springboot.svg",
       details: "REST APIs, Spring Data JPA, Spring Security, IoC & Dependency Injection",
       annotation: "@SpringBootApplication"
-    },
-    {
-      name: "REST API",
-      category: "API DESIGN",
-      version: "OpenAPI / Swagger 3.0",
-      details: "Idempotent HTTP verbs, RESTful resource naming, status codes, JSON schemas",
-      annotation: "Content-Type: application/json"
     },
     {
       name: "MYSQL",
       category: "RELATIONAL DATABASE",
       version: "MySQL 8.0 / InnoDB",
+      logo: "/assets/tech/mysql.svg",
       details: "Schema normalization, indexing strategies, complex JOINs, ACID transactions",
       annotation: "SELECT * FROM sys.performance_schema"
+    },
+    {
+      name: "PYTHON",
+      category: "SCRIPTING & DATA",
+      version: "Python 3.11+",
+      logo: "/assets/tech/python.svg",
+      details: "Automation, data scripts, backend utilities, microservices & async APIs",
+      annotation: "def handle_transaction(ctx):"
     },
     {
       name: "LINUX",
       category: "OPERATING SYSTEM",
       version: "Ubuntu / Debian / RHEL",
+      logo: "/assets/tech/linux.svg",
       details: "Shell scripting (Bash), systemd services, process monitoring, file permissions",
       annotation: "$ sudo systemctl status eswar-backend"
-    },
-    {
-      name: "NETWORKING",
-      category: "PROTOCOLS & INFRA",
-      version: "TCP/IP • HTTP/HTTPS • DNS",
-      details: "Sockets, load balancing fundamentals, CORS configuration, SSL/TLS certificates",
-      annotation: "SYN -> SYN-ACK -> ACK"
     },
     {
       name: "GIT",
       category: "VERSION CONTROL",
       version: "Git CLI & Workflows",
+      logo: "/assets/tech/git.svg",
       details: "Feature branching, rebase workflows, semantic commits, PR code reviews",
       annotation: "git commit -m 'feat: scalable backend pipeline'"
     },
     {
-      name: "CLOUD",
+      name: "DOCKER & CLOUD",
       category: "INFRASTRUCTURE",
-      version: "AWS / Containers",
-      details: "Docker containers, environment configurations, cloud databases, CI/CD pipelines",
+      version: "Docker / AWS Containers",
+      logo: "/assets/tech/docker.svg",
+      details: "Containerization, multi-stage builds, cloud deployments, CI/CD pipelines",
       annotation: "docker run -p 8080:8080 eswar/api"
-    }
-  ],
-
-  experienceTimeline: [
-    {
-      period: "2023",
-      milestone: "JAVA DEVELOPMENT FOUNDATION",
-      role: "Core Software & Algorithms",
-      narrative: "Deep-dived into Object-Oriented Programming, Data Structures, Multithreading, and Memory Management in Java. Built solid foundations in algorithms and software patterns."
     },
     {
-      period: "2024",
-      milestone: "FULL STACK INTEGRATION",
-      role: "Modern Web & API Engineering",
-      narrative: "Bridged client and server realms. Engineered end-to-end applications integrating responsive Next.js frontends with robust backend data pipelines."
-    },
-    {
-      period: "2025",
-      milestone: "BACKEND ARCHITECTURE",
-      role: "Spring Boot & Distributed Systems",
-      narrative: "Specialized in microservice architectures, Spring Boot ecosystems, relational database optimization, and high-throughput RESTful services."
-    },
-    {
-      period: "PRESENT",
-      milestone: "SOFTWARE ENGINEERING",
-      role: "Production Systems & Cloud Readiness",
-      narrative: "Designing scalable, maintainable enterprise backends with automated CI/CD, Linux system administration, and resilient transactional databases."
+      name: "REST API",
+      category: "API DESIGN",
+      version: "OpenAPI / Swagger 3.0",
+      logo: "/assets/tech/restapi.svg",
+      details: "Idempotent HTTP verbs, RESTful resource naming, status codes, JSON schemas",
+      annotation: "Content-Type: application/json"
     }
   ]
 };

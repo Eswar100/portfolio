@@ -41,6 +41,11 @@ export default function CharacterCanvas({ progressRef }) {
       // Clear previous frame
       ctx.clearRect(0, 0, width, height);
 
+      if (state.isVisible === false) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
+
       const img = frameManager.getFrame(state.sequence, state.frameIndex);
 
       if (img && img.complete && img.naturalWidth > 0) {
@@ -115,7 +120,7 @@ export default function CharacterCanvas({ progressRef }) {
         width: '100vw',
         height: '100vh',
         pointerEvents: 'none',
-        zIndex: 20
+        zIndex: 25 // Foreground above the gallery wall & frames (layer 10)
       }}
     />
   );

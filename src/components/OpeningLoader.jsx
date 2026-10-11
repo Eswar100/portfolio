@@ -10,6 +10,18 @@ export default function OpeningLoader({ progress, onEnterWorld }) {
     });
   }, []);
 
+  // Automatic camera pullback after showing INITIALIZED
+  useEffect(() => {
+    if (loadInfo.initialReady && progress < 0.02) {
+      const timer = setTimeout(() => {
+        if (onEnterWorld) {
+          onEnterWorld();
+        }
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
+  }, [loadInfo.initialReady, progress, onEnterWorld]);
+
   // When progress > 0.08, the loader has faded out as camera pulls back
   const opacity = Math.max(0, 1 - progress / 0.08);
   if (opacity <= 0.01) return null;

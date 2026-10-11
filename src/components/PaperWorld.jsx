@@ -3,16 +3,30 @@ import Lenis from 'lenis';
 import CharacterCanvas from './CharacterCanvas';
 import OpeningLoader from './OpeningLoader';
 import HeroOverlay from './HeroOverlay';
+import FallSpaceTransition from './FallSpaceTransition';
 import ProjectsWorld from './ProjectsWorld';
-import ArchitectureWorld from './ArchitectureWorld';
 import TechStackWorld from './TechStackWorld';
-import TimelineWorld from './TimelineWorld';
 import FinalWaveWorld from './FinalWaveWorld';
 import FloatingNav from './FloatingNav';
 import ProjectModal from './ProjectModal';
 import CustomCursor from './CustomCursor';
 import { soundManager } from '../services/SoundManager';
 import { frameManager } from '../services/CharacterFrameManager';
+
+/**
+ * PaperWorld
+ * Master Cinematic Conductor for Eswar's Hand-Drawn Continuous Portfolio Journey.
+ * 
+ * Journey Sequence:
+ * 1. LOADING (Zoomed camera, "INITIALIZED.", camera pull-back)
+ * 2. HERO ("LET'S BUILD SOMETHING.", Developer positioning, links)
+ * 3. FALL TRANSITION 1 (Hero -> Projects: Asteroid & Satellite sketch space)
+ * 4. PROJECT WALL (Physical architectural stone gallery, real project screenshots)
+ * 5. FALL TRANSITION 2 (Projects -> Tech Stack: Asteroid belt descent)
+ * 6. TECH STACK WALL (Physical architectural wall, actual tech logos)
+ * 7. FALL TRANSITION 3 (Tech Stack -> Final: Deep space descent)
+ * 8. FINAL / CONTACT ("Thanks for visiting!", WebM-ready character slot, links, Colophon)
+ */
 
 export default function PaperWorld() {
   const [progress, setProgress] = useState(0);
@@ -47,12 +61,12 @@ export default function PaperWorld() {
       progressRef.current = p;
       setProgress(p);
 
-      // Trigger tactile audio cues during major scene transitions
+      // Trigger tactile audio cues during major landings onto gallery floors
       const prevP = lastPRef.current;
       if (
-        (prevP < 0.25 && p >= 0.25) || // Landing 1
-        (prevP < 0.58 && p >= 0.58) || // Landing 2
-        (prevP < 0.90 && p >= 0.90)    // Landing 3
+        (prevP < 0.25 && p >= 0.25) || // Landing 1: Project Gallery Floor
+        (prevP < 0.58 && p >= 0.58) || // Landing 2: Tech Stack Gallery Floor
+        (prevP < 0.91 && p >= 0.91)    // Landing 3: Final Base Platform
       ) {
         soundManager.playImpact();
       }
@@ -94,7 +108,7 @@ export default function PaperWorld() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', minHeight: '850vh' }}>
+    <div style={{ position: 'relative', width: '100%', minHeight: '800vh' }}>
       {/* Paper grain overlay */}
       <div className="paper-grain-overlay" />
 
@@ -107,28 +121,46 @@ export default function PaperWorld() {
       {/* Floating Navigation */}
       <FloatingNav progress={progress} onNavigate={handleNavigate} />
 
-      {/* Hardware-Accelerated Continuous Character Canvas */}
+      {/* Hardware-Accelerated Continuous Character Canvas (zIndex: 25 - Foreground above walls) */}
       <CharacterCanvas progressRef={progressRef} />
 
       {/* Scene 1: Opening / Loading Experience */}
-      <OpeningLoader progress={progress} onEnterWorld={() => handleNavigate(0.12)} />
+      <OpeningLoader progress={progress} onEnterWorld={() => handleNavigate(0.10)} />
 
       {/* Scene 2: Hero Composition */}
       <HeroOverlay progress={progress} />
 
-      {/* Scene 3: Projects World Gallery Walk */}
+      {/* Transition 1: First Fall & Space Journey (Hero -> Project Wall) */}
+      <FallSpaceTransition
+        progress={progress}
+        startProgress={0.18}
+        endProgress={0.28}
+        variant="hero-to-projects"
+      />
+
+      {/* Scene 3: Projects World Gallery Wall (Data-Driven, Physical Masonry Wall) */}
       <ProjectsWorld progress={progress} onSelectProject={(p) => setSelectedProject(p)} />
 
-      {/* Scene 4: Backend Architecture Visualization */}
-      <ArchitectureWorld progress={progress} />
+      {/* Transition 2: Second Fall & Space Journey (Projects -> Tech Stack) */}
+      <FallSpaceTransition
+        progress={progress}
+        startProgress={0.52}
+        endProgress={0.62}
+        variant="projects-to-tech"
+      />
 
-      {/* Scene 5: Tech Stack Monoliths (Opposite Journey Walk) */}
+      {/* Scene 4: Tech Stack World Gallery Wall (Data-Driven, Real Tech Logos) */}
       <TechStackWorld progress={progress} />
 
-      {/* Scene 6: Continuous Drawn Timeline World */}
-      <TimelineWorld progress={progress} />
+      {/* Transition 3: Final Fall & Space Journey (Tech Stack -> Final Scene) */}
+      <FallSpaceTransition
+        progress={progress}
+        startProgress={0.86}
+        endProgress={0.93}
+        variant="tech-to-final"
+      />
 
-      {/* Scene 7: Final Landing & Waving Character */}
+      {/* Scene 5: Final Landing, Waving Character & Contact Dossier */}
       <FinalWaveWorld progress={progress} />
 
       {/* Interactive Project Architecture Dossier Modal */}
