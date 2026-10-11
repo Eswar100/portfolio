@@ -1,0 +1,282 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   ESWAR PORTFOLIO — EDITORIAL PAPER & ARCHITECTURAL MOTION DESIGN SYSTEM
+   ========================================================================== */
+
+:root {
+  /* Color Palette — Tactile Paper & Architectural Inks */
+  --paper-bg: #f8f6f0;
+  --paper-cream: #f3efe6;
+  --paper-card: #ffffff;
+  --paper-border: #dcd6c8;
+  --paper-line: #e3ded2;
+  
+  --ink-primary: #121316;
+  --ink-secondary: #484c56;
+  --ink-muted: #7b808e;
+  --ink-blueprint: #244673;
+  --ink-accent: #c44d34;
+  --ink-forest: #2d5a3f;
+  
+  --grid-line: rgba(36, 44, 60, 0.05);
+  --grid-crosshair: rgba(36, 44, 60, 0.12);
+  --shadow-paper: 0 12px 36px -8px rgba(32, 28, 24, 0.08), 0 2px 8px -2px rgba(32, 28, 24, 0.04);
+  --shadow-float: 0 24px 50px -12px rgba(28, 24, 20, 0.12), 0 4px 16px -4px rgba(28, 24, 20, 0.06);
+
+  /* Typography */
+  --font-display: 'Space Grotesk', -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-hand: 'Caveat', cursive;
+
+  /* Easing */
+  --ease-cinematic: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-paper: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background-color: var(--paper-bg);
+  color: var(--ink-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--paper-border) var(--paper-bg);
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+body {
+  background-color: var(--paper-bg);
+  color: var(--ink-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* Texture overlay for authentic warm paper feel */
+.paper-grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Subtle architectural coordinate grid */
+.architectural-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  background-size: 80px 80px;
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+}
+
+/* Corner registration marks */
+.reg-mark {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0.4;
+}
+.reg-mark::before, .reg-mark::after {
+  content: '';
+  position: absolute;
+  background: var(--ink-secondary);
+}
+.reg-mark::before {
+  top: 6px;
+  left: 0;
+  width: 14px;
+  height: 1px;
+}
+.reg-mark::after {
+  top: 0;
+  left: 6px;
+  width: 1px;
+  height: 14px;
+}
+
+/* Typography styles */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-hand {
+  font-family: var(--font-hand);
+}
+
+/* Hand-drawn sketch borders */
+.sketch-border {
+  border: 1px solid var(--paper-border);
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.sketch-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1px dashed rgba(36, 44, 60, 0.12);
+  pointer-events: none;
+}
+
+/* Custom interactive buttons */
+.paper-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: var(--paper-card);
+  color: var(--ink-primary);
+  border: 1px solid var(--ink-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink-primary);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+}
+
+.paper-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink-primary);
+}
+
+.paper-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--ink-primary);
+}
+
+.paper-button-blueprint {
+  border-color: var(--ink-blueprint);
+  color: var(--ink-blueprint);
+  box-shadow: 3px 3px 0 var(--ink-blueprint);
+}
+.paper-button-blueprint:hover {
+  box-shadow: 5px 5px 0 var(--ink-blueprint);
+}
+
+/* Code badges & tags */
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: var(--paper-cream);
+  border: 1px solid var(--paper-border);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-secondary);
+  border-radius: 2px;
+}
+
+/* Blueprint card */
+.blueprint-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--paper-border);
+  box-shadow: var(--shadow-paper);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s var(--ease-paper), box-shadow 0.3s var(--ease-paper);
+}
+
+.blueprint-card:hover {
+  box-shadow: var(--shadow-float);
+  border-color: var(--ink-primary);
+}
+
+/* Pulse indicator for live backend status */
+@keyframes status-pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  animation: status-pulse 2s infinite ease-in-out;
+}
+
+/* Scroll indicator animation */
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.animate-bounce-down {
+  animation: bounce-down 1.8s infinite ease-in-out;
+}
+
+/* Modal backdrop */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 19, 22, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Custom Scrollbar for elements */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--paper-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-muted);
+}
