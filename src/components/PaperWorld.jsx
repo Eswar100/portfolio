@@ -96,6 +96,19 @@ export default function PaperWorld() {
     };
   }, []);
 
+  // Lock background Lenis scroll engine whenever Project Modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      if (lenisRef.current) {
+        lenisRef.current.stop();
+      }
+    } else {
+      if (lenisRef.current) {
+        lenisRef.current.start();
+      }
+    }
+  }, [selectedProject]);
+
   // Smooth programmatic scroll to progress target (0 to 1)
   const handleNavigate = (targetProgress) => {
     const maxScroll = document.body.scrollHeight - window.innerHeight;

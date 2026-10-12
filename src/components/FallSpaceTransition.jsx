@@ -178,7 +178,7 @@ export default function FallSpaceTransition({
                   display: 'block',
                   maxWidth: '120px',
                   height: 'auto',
-                  filter: 'drop-shadow(1px 2px 4px rgba(32, 28, 24, 0.15))'
+                  filter: 'grayscale(100%) drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.15))'
                 }}
               />
             </div>
@@ -207,14 +207,14 @@ export default function FallSpaceTransition({
                   display: 'block',
                   maxWidth: '220px',
                   height: 'auto',
-                  filter: 'drop-shadow(2px 4px 6px rgba(32, 28, 24, 0.12))'
+                  filter: 'grayscale(100%) drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.12))'
                 }}
               />
               <div
                 className="font-mono"
                 style={{
                   fontSize: '0.62rem',
-                  color: 'var(--ink-blueprint)',
+                  color: 'var(--ink-secondary)',
                   marginTop: '4px',
                   textAlign: 'center',
                   opacity: 0.85

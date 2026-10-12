@@ -209,7 +209,8 @@ export default function TechStackWorld({ progress }) {
                       maxWidth: '100%',
                       maxHeight: '100%',
                       objectFit: 'contain',
-                      display: 'block'
+                      display: 'block',
+                      filter: 'grayscale(100%)'
                     }}
                     loading="lazy"
                   />

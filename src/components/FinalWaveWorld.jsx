@@ -2,23 +2,18 @@ import React, { useState } from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { Mail, FileText, Check, Copy } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
+import DeveloperDoodles from './DeveloperDoodles';
 
 /**
  * FinalWaveWorld
  * Final Destination / Contact Scene.
  * 
- * The canvas character (CharacterCanvas) now renders the wave animation in this scene
- * at posX=0.20, scale=0.90 — keeping it visually consistent with all previous scenes.
- * 
- * This component only renders the contact content on the RIGHT side,
- * plus a speech bubble anchored in the left character zone (pointing to the canvas character).
- * 
- * WebM Upgrade Path:
- * When a transparent WebM is available, pass it as `webmSrc` and it will render
- * inside the left character zone, overlaying the canvas character.
+ * Uses /assets/character/wave.png directly as requested.
+ * No WebM, no video, no animated wave.
+ * Strict black & white / grayscale visual identity.
  */
 
-export default function FinalWaveWorld({ progress, webmSrc = null }) {
+export default function FinalWaveWorld({ progress }) {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   // Active in final zone: 0.92 to 1.00
@@ -54,12 +49,12 @@ export default function FinalWaveWorld({ progress, webmSrc = null }) {
         transition: 'opacity 0.2s ease-out'
       }}
     >
+      {/* Hand-drawn developer doodles for Final section */}
+      <DeveloperDoodles variant="final" />
+
       {/* ========================================================
-          LEFT CHARACTER ZONE — Speech Bubble & Optional WebM Override
+          LEFT CHARACTER ZONE — Speech Bubble & wave.png Visual
           ========================================================
-          The canvas character renders underneath at posX=0.20.
-          This zone just adds the speech bubble overlay pointing at it.
-          If webmSrc is provided, the WebM plays here on top.
       */}
       <div
         style={{
@@ -89,7 +84,7 @@ export default function FinalWaveWorld({ progress, webmSrc = null }) {
           <div className="font-hand" style={{ fontSize: 'clamp(1.3rem, 2vw, 1.7rem)', color: 'var(--ink-primary)', fontWeight: 700 }}>
             Thanks for visiting!
           </div>
-          <div className="font-hand" style={{ fontSize: 'clamp(1rem, 1.6vw, 1.3rem)', color: 'var(--ink-accent)' }}>
+          <div className="font-hand" style={{ fontSize: 'clamp(1rem, 1.6vw, 1.3rem)', color: 'var(--ink-secondary)' }}>
             See you around! 👋
           </div>
         </div>
@@ -100,39 +95,36 @@ export default function FinalWaveWorld({ progress, webmSrc = null }) {
         </svg>
       </div>
 
-      {/* Optional WebM overlay in the character zone */}
-      {webmSrc && (
-        <div
-          id="final-character-slot"
+      {/* Standalone Character Wave Visual using /assets/character/wave.png directly */}
+      <div
+        id="final-character-slot"
+        style={{
+          position: 'absolute',
+          left: 'clamp(4%, 12vw, 20%)',
+          bottom: '8vh',
+          width: 'clamp(260px, 30vw, 440px)',
+          height: '68vh',
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          pointerEvents: 'none',
+          zIndex: 26,
+          overflow: 'visible'
+        }}
+      >
+        <img
+          src="/assets/character/wave.png"
+          alt="Eswar waving"
           style={{
-            position: 'absolute',
-            left: 'clamp(4%, 12vw, 20%)',
-            bottom: '8vh',
-            width: 'clamp(280px, 32vw, 480px)',
-            height: '68vh',
-            display: 'flex',
-            alignItems: 'flex-end',
-            justifyContent: 'center',
-            pointerEvents: 'none',
-            zIndex: 26,
-            overflow: 'visible'
+            maxWidth: '100%',
+            height: 'auto',
+            maxHeight: '100%',
+            objectFit: 'contain',
+            filter: 'grayscale(100%) drop-shadow(2px 6px 14px rgba(0,0,0,0.12))',
+            display: 'block'
           }}
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            src={webmSrc}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-              backgroundColor: 'transparent'
-            }}
-          />
-        </div>
-      )}
+        />
+      </div>
 
       {/* Main Closing & Contact Dossier — Positioned cleanly on the right side */}
       <div
@@ -208,7 +200,7 @@ export default function FinalWaveWorld({ progress, webmSrc = null }) {
             href={developer.social.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="paper-button paper-button-blueprint interactive"
+            className="paper-button interactive"
             style={{ justifyContent: 'center' }}
           >
             <LinkedinIcon size={15} /> LINKEDIN
@@ -221,7 +213,7 @@ export default function FinalWaveWorld({ progress, webmSrc = null }) {
             className="paper-button interactive"
             style={{ justifyContent: 'center' }}
           >
-            {copiedEmail ? <Check size={15} color="#16a34a" /> : <Copy size={15} />}
+            {copiedEmail ? <Check size={15} color="var(--ink-primary)" /> : <Copy size={15} />}
             {copiedEmail ? 'COPIED!' : 'COPY EMAIL'}
           </button>
 
@@ -229,7 +221,7 @@ export default function FinalWaveWorld({ progress, webmSrc = null }) {
           <a
             href={developer.social.resume}
             className="paper-button interactive"
-            style={{ justifyContent: 'center', borderColor: 'var(--ink-accent)', color: 'var(--ink-accent)' }}
+            style={{ justifyContent: 'center', borderColor: 'var(--ink-primary)', color: 'var(--ink-primary)' }}
           >
             <FileText size={15} /> RESUME PDF
           </a>

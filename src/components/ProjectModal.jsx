@@ -1,73 +1,136 @@
-import React, { useEffect } from 'react';
-import { X, ExternalLink, ShieldCheck, Terminal, Layers } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { X, ExternalLink, Terminal, Layers } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
+/**
+ * ProjectModal
+ * High-Integrity Architectural Dossier Modal.
+ * 
+ * Scroll Requirements:
+ * - Isolated internal vertical scrolling for modal card
+ * - Locks background page & stops Lenis scroll engine while open
+ * - Restores background scrolling on close & React cleanup
+ * - overscroll-behavior: contain to prevent scroll chaining
+ * - Mouse-wheel, trackpad, and touch scrolling work smoothly inside
+ * - Strict black & white / grayscale visual identity
+ */
+
 export default function ProjectModal({ project, onClose }) {
+  const contentRef = useRef(null);
+
   useEffect(() => {
     if (!project) return;
+
+    // ESC to close
     const onKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        onClose();
+      }
     };
     window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+
+    // Save initial overflow values
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+
+    // Lock page background scrolling
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+    };
   }, [project, onClose]);
 
   if (!project) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div
+      className="modal-overlay"
+      data-lenis-prevent
+      onClick={onClose}
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(18, 19, 22, 0.72)',
+        backdropFilter: 'blur(5px)',
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 'clamp(14px, 3vw, 30px)',
+        overscrollBehavior: 'contain',
+        overflow: 'hidden'
+      }}
+    >
       <div
+        ref={contentRef}
         className="blueprint-card"
+        data-lenis-prevent
+        onClick={(e) => e.stopPropagation()}
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
         style={{
           maxWidth: '740px',
           width: '100%',
-          maxHeight: '90vh',
+          maxHeight: '88vh',
           overflowY: 'auto',
+          overscrollBehavior: 'contain',
+          WebkitOverflowScrolling: 'touch',
           background: '#ffffff',
-          padding: 'clamp(24px, 4vw, 40px)',
+          border: '2px solid var(--ink-primary)',
+          boxShadow: 'var(--shadow-float)',
+          padding: 'clamp(20px, 4vw, 36px)',
           position: 'relative'
         }}
-        onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
           className="interactive"
           style={{
             position: 'absolute',
-            top: '20px',
-            right: '20px',
+            top: '18px',
+            right: '18px',
             background: 'var(--paper-cream)',
-            border: '1px solid var(--paper-border)',
+            border: '1px solid var(--ink-primary)',
             padding: '6px',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            zIndex: 10
           }}
           aria-label="Close modal"
         >
-          <X size={18} />
+          <X size={18} color="var(--ink-primary)" />
         </button>
 
-        {/* Header */}
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '8px' }}>
-          <span className="tech-tag" style={{ background: 'var(--paper-cream)', color: project.accent }}>
+        {/* Header Tag */}
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap' }}>
+          <span className="tech-tag" style={{ background: 'var(--paper-cream)', color: 'var(--ink-primary)', fontWeight: 700 }}>
             {project.category}
           </span>
           <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--ink-muted)' }}>
-            ARCHITECTURAL DOSSIER
+            ARCHITECTURAL DOSSIER // MONOCHROME
           </span>
         </div>
 
+        {/* Project Title */}
         <h2
           className="font-display"
           style={{
-            fontSize: 'clamp(1.8rem, 3.2vw, 2.5rem)',
+            fontSize: 'clamp(1.8rem, 3.2vw, 2.4rem)',
             fontWeight: 800,
             letterSpacing: '-0.02em',
             color: 'var(--ink-primary)',
-            marginBottom: '4px'
+            marginBottom: '4px',
+            paddingRight: '36px'
           }}
         >
           {project.title}
@@ -76,7 +139,7 @@ export default function ProjectModal({ project, onClose }) {
           {project.tagline}
         </p>
 
-        {/* Stack */}
+        {/* Stack Badges */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '20px' }}>
           {project.stack.map((s, i) => (
             <span key={i} className="tech-tag">
@@ -102,9 +165,9 @@ export default function ProjectModal({ project, onClose }) {
         <div
           style={{
             background: 'var(--paper-cream)',
-            borderLeft: `4px solid ${project.accent}`,
+            borderLeft: '4px solid var(--ink-primary)',
             padding: '12px 16px',
-            marginBottom: '24px'
+            marginBottom: '22px'
           }}
         >
           <div className="font-mono" style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--ink-primary)', marginBottom: '4px' }}>
@@ -118,7 +181,7 @@ export default function ProjectModal({ project, onClose }) {
 
         {/* API Endpoints Schematic */}
         {project.endpoints && (
-          <div style={{ marginBottom: '24px' }}>
+          <div style={{ marginBottom: '22px' }}>
             <div className="font-mono" style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--ink-primary)', marginBottom: '8px' }}>
               <Terminal size={14} style={{ display: 'inline', marginRight: '6px' }} />
               REST API ENDPOINTS SPECIFICATION
@@ -127,7 +190,7 @@ export default function ProjectModal({ project, onClose }) {
               style={{
                 background: '#121316',
                 color: '#f1f1f1',
-                padding: '14px 18px',
+                padding: '12px 16px',
                 borderRadius: '2px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -138,14 +201,17 @@ export default function ProjectModal({ project, onClose }) {
                 <div key={idx} className="font-mono" style={{ fontSize: '0.74rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
                   <span
                     style={{
-                      color: ep.method === 'POST' ? '#38bdf8' : ep.method === 'GET' ? '#4ade80' : ep.method === 'PUT' ? '#fbbf24' : '#f87171',
+                      color: '#ffffff',
+                      background: '#2c2c2c',
+                      padding: '1px 6px',
+                      borderRadius: '2px',
                       fontWeight: 700
                     }}
                   >
                     {ep.method}
                   </span>
                   <span style={{ color: '#ffffff' }}>{ep.path}</span>
-                  <span style={{ color: '#94a3b8' }}>— {ep.desc}</span>
+                  <span style={{ color: '#888888' }}>— {ep.desc}</span>
                 </div>
               ))}
             </div>
@@ -157,8 +223,8 @@ export default function ProjectModal({ project, onClose }) {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-            gap: '12px',
-            marginBottom: '28px'
+            gap: '10px',
+            marginBottom: '26px'
           }}
         >
           {Object.entries(project.metrics).map(([k, v], mIdx) => (
@@ -178,7 +244,7 @@ export default function ProjectModal({ project, onClose }) {
         </div>
 
         {/* Action Buttons */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', flexWrap: 'wrap' }}>
           <a
             href={project.github}
             target="_blank"
@@ -191,7 +257,8 @@ export default function ProjectModal({ project, onClose }) {
             href={project.live}
             target="_blank"
             rel="noreferrer"
-            className="paper-button paper-button-blueprint interactive"
+            className="paper-button interactive"
+            style={{ borderColor: 'var(--ink-primary)' }}
           >
             <ExternalLink size={15} /> LAUNCH DEMO
           </a>

@@ -43,7 +43,7 @@ export const PORTFOLIO_DATA = {
       },
       github: "https://github.com",
       live: "https://demo.eswar.dev/tasks",
-      accent: "#2b4c7e"
+      accent: "#121316"
     },
     {
       id: "banking-system",
@@ -66,7 +66,7 @@ export const PORTFOLIO_DATA = {
       },
       github: "https://github.com",
       live: "https://demo.eswar.dev/banking",
-      accent: "#2d5a3f"
+      accent: "#121316"
     },
     {
       id: "youmate",
@@ -88,7 +88,7 @@ export const PORTFOLIO_DATA = {
       },
       github: "https://github.com",
       live: "https://youmate.app",
-      accent: "#8b4513"
+      accent: "#121316"
     }
   ],
 

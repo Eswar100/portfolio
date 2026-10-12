@@ -210,6 +210,7 @@ export default function ProjectsWorld({ progress, onSelectProject }) {
                       height: '100%',
                       objectFit: 'cover',
                       display: 'block',
+                      filter: 'grayscale(100%)',
                       transition: 'transform 0.3s ease'
                     }}
                     loading="lazy"

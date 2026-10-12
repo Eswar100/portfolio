@@ -2,16 +2,17 @@ import React from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { Mail, FileText, ArrowDown } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
+import DeveloperDoodles from './DeveloperDoodles';
 
 export default function HeroOverlay({ progress }) {
-  // Fade in as camera pulls back (from 0.05 to 0.08) and stay visible until transition 1 (around 0.18)
+  // Fade in as camera pulls back (from 0.06 to 0.08) and stay visible until transition 1 (around 0.18)
   let opacity = 0;
-  if (progress >= 0.05 && progress < 0.09) {
-    opacity = (progress - 0.05) / 0.04;
-  } else if (progress >= 0.09 && progress <= 0.17) {
+  if (progress >= 0.06 && progress < 0.08) {
+    opacity = (progress - 0.06) / 0.02;
+  } else if (progress >= 0.08 && progress < 0.18) {
     opacity = 1;
-  } else if (progress > 0.17 && progress <= 0.20) {
-    opacity = Math.max(0, 1 - (progress - 0.17) / 0.03);
+  } else if (progress >= 0.18 && progress <= 0.21) {
+    opacity = Math.max(0, 1 - (progress - 0.18) / 0.03);
   }
 
   if (opacity <= 0.01) return null;
@@ -39,27 +40,73 @@ export default function HeroOverlay({ progress }) {
         transition: 'opacity 0.2s ease-out'
       }}
     >
-      {/* Hand-drawn greeting pointing to the character — positioned over the left character zone */}
+      {/* Hand-drawn developer doodles occupying empty negative space */}
+      <DeveloperDoodles variant="hero" />
+
+      {/* Hand-drawn greeting pointing to the character */}
       <div
         style={{
           position: 'absolute',
-          left: 'clamp(27%, 6vw, 9%)',
-          top: 'clamp(16%, 20vh, 24%)',
-
+          left: 'clamp(4%, 12vw, 20%)',
+          top: '12%',
           pointerEvents: 'none',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          transform: 'rotate(-4deg)'
+          transform: 'rotate(-3deg)',
+          zIndex: 28
         }}
       >
-        <span className="font-hand" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)', color: 'var(--ink-primary)', fontWeight: 700 }}>
-          Hello there 👋
-        </span>
-        <svg width="45" height="35" viewBox="0 0 50 40" fill="none" style={{ marginTop: '2px', opacity: 0.7 }}>
-          <path d="M40 5 C 30 20, 15 25, 5 35" stroke="var(--ink-primary)" strokeWidth="1.8" strokeLinecap="round" strokeDasharray="3 3" />
-          <path d="M5 35 L 14 32 M 5 35 L 7 24" stroke="var(--ink-primary)" strokeWidth="1.8" strokeLinecap="round" />
+        <div
+          className="sketch-border"
+          style={{
+            background: '#ffffff',
+            padding: '10px 18px',
+            borderRadius: '16px 16px 16px 2px',
+            boxShadow: 'var(--shadow-paper)',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          <span className="font-hand" style={{ fontSize: 'clamp(1.4rem, 2.2vw, 2rem)', color: 'var(--ink-primary)', fontWeight: 700 }}>
+            Hello there 👋
+          </span>
+        </div>
+        {/* Dashed arrow pointing down toward character body */}
+        <svg width="35" height="42" viewBox="0 0 35 42" fill="none" style={{ marginLeft: '20px', marginTop: '4px', opacity: 0.7 }}>
+          <path d="M16 2 C 22 16, 18 24, 8 38" stroke="var(--ink-primary)" strokeWidth="1.6" strokeLinecap="round" strokeDasharray="3 3" />
+          <path d="M8 38 L 16 34 M 8 38 L 7 26" stroke="var(--ink-primary)" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
+      </div>
+
+      {/* Standalone Character Wave Visual using /assets/character/wave.png directly */}
+      <div
+        id="hero-character-slot"
+        style={{
+          position: 'absolute',
+          left: 'clamp(4%, 12vw, 20%)',
+          bottom: '8vh',
+          width: 'clamp(260px, 30vw, 440px)',
+          height: '68vh',
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          pointerEvents: 'none',
+          zIndex: 26,
+          overflow: 'visible'
+        }}
+      >
+        <img
+          src="/assets/character/wave.png"
+          alt="Eswar waving"
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            maxHeight: '100%',
+            objectFit: 'contain',
+            filter: 'grayscale(100%) drop-shadow(2px 6px 14px rgba(0,0,0,0.12))',
+            display: 'block'
+          }}
+        />
       </div>
 
       {/* Main Hero Content — Positioned on the right side with guaranteed character clearance */}
@@ -70,7 +117,8 @@ export default function HeroOverlay({ progress }) {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          gap: '16px'
+          gap: '16px',
+          zIndex: 26
         }}
       >
         {/* Editorial Subtitle / Role Tag */}
@@ -104,7 +152,7 @@ export default function HeroOverlay({ progress }) {
             fontSize: 'clamp(1.4rem, 2.8vw, 2.4rem)',
             fontWeight: 700,
             letterSpacing: '-0.02em',
-            color: 'var(--ink-blueprint)',
+            color: 'var(--ink-primary)',
             lineHeight: 1.15
           }}
         >
@@ -161,7 +209,7 @@ export default function HeroOverlay({ progress }) {
             href={developer.social.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="paper-button paper-button-blueprint interactive"
+            className="paper-button interactive"
             style={{ padding: '7px 14px', fontSize: '0.78rem' }}
           >
             <LinkedinIcon size={14} /> LINKEDIN
@@ -169,7 +217,7 @@ export default function HeroOverlay({ progress }) {
           <a
             href={developer.social.resume}
             className="paper-button interactive"
-            style={{ padding: '7px 14px', fontSize: '0.78rem', borderColor: 'var(--ink-accent)', color: 'var(--ink-accent)' }}
+            style={{ padding: '7px 14px', fontSize: '0.78rem' }}
           >
             <FileText size={14} /> RESUME
           </a>
