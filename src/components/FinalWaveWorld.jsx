@@ -7,11 +7,15 @@ import { GithubIcon, LinkedinIcon } from './Icons';
  * FinalWaveWorld
  * Final Destination / Contact Scene.
  * 
- * Features:
- * - Dedicated Final Character Container prepared for seamless Transparent WebM drop-in.
- * - Stable position, responsive sizing, floor-aligned, zero clipping, transparent background.
- * - Preserved narrative content: "Thanks for visiting!", "See you around!", "END OF RUNTIME JOURNEY",
- *   "EXIT STATUS: 0 (SUCCESS)", social/contact links, and email copy.
+ * The canvas character (CharacterCanvas) now renders the wave animation in this scene
+ * at posX=0.20, scale=0.90 — keeping it visually consistent with all previous scenes.
+ * 
+ * This component only renders the contact content on the RIGHT side,
+ * plus a speech bubble anchored in the left character zone (pointing to the canvas character).
+ * 
+ * WebM Upgrade Path:
+ * When a transparent WebM is available, pass it as `webmSrc` and it will render
+ * inside the left character zone, overlaying the canvas character.
  */
 
 export default function FinalWaveWorld({ progress, webmSrc = null }) {
@@ -51,31 +55,69 @@ export default function FinalWaveWorld({ progress, webmSrc = null }) {
       }}
     >
       {/* ========================================================
-          DEDICATED FINAL CHARACTER CONTAINER (READY FOR WEBM)
+          LEFT CHARACTER ZONE — Speech Bubble & Optional WebM Override
           ========================================================
-          - Stable absolute coordinates aligned with gallery floor.
-          - Sized to match 16:9 character proportions.
-          - Set `webmSrc="/path/to/character_wave.webm"` to replace anytime.
-          - Zero layout shift, no clipping, transparent background.
+          The canvas character renders underneath at posX=0.20.
+          This zone just adds the speech bubble overlay pointing at it.
+          If webmSrc is provided, the WebM plays here on top.
       */}
       <div
-        id="final-character-slot"
         style={{
           position: 'absolute',
-          left: 'clamp(6%, 16vw, 24%)',
-          bottom: '8vh',
-          width: 'clamp(300px, 36vw, 540px)',
-          height: '70vh',
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'center',
+          left: 'clamp(4%, 12vw, 20%)',
+          top: '12%',
           pointerEvents: 'none',
-          zIndex: 26,
-          overflow: 'visible'
+          zIndex: 28,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          gap: '12px'
         }}
       >
-        {webmSrc ? (
-          /* When transparent WebM is available, it plays here seamlessly */
+        {/* Speech bubble */}
+        <div
+          className="sketch-border"
+          style={{
+            background: '#ffffff',
+            padding: '12px 18px',
+            borderRadius: '16px 16px 16px 2px',
+            boxShadow: 'var(--shadow-paper)',
+            whiteSpace: 'nowrap',
+            transform: 'rotate(2deg)'
+          }}
+        >
+          <div className="font-hand" style={{ fontSize: 'clamp(1.3rem, 2vw, 1.7rem)', color: 'var(--ink-primary)', fontWeight: 700 }}>
+            Thanks for visiting!
+          </div>
+          <div className="font-hand" style={{ fontSize: 'clamp(1rem, 1.6vw, 1.3rem)', color: 'var(--ink-accent)' }}>
+            See you around! 👋
+          </div>
+        </div>
+        {/* Dashed arrow pointing down toward the character body */}
+        <svg width="30" height="40" viewBox="0 0 30 40" fill="none" style={{ marginLeft: '20px', opacity: 0.6 }}>
+          <path d="M15 0 C 10 15, 20 25, 8 38" stroke="var(--ink-primary)" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
+          <path d="M8 38 L 14 34 M 8 38 L 6 30" stroke="var(--ink-primary)" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </div>
+
+      {/* Optional WebM overlay in the character zone */}
+      {webmSrc && (
+        <div
+          id="final-character-slot"
+          style={{
+            position: 'absolute',
+            left: 'clamp(4%, 12vw, 20%)',
+            bottom: '8vh',
+            width: 'clamp(280px, 32vw, 480px)',
+            height: '68vh',
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            pointerEvents: 'none',
+            zIndex: 26,
+            overflow: 'visible'
+          }}
+        >
           <video
             autoPlay
             loop
@@ -89,83 +131,13 @@ export default function FinalWaveWorld({ progress, webmSrc = null }) {
               backgroundColor: 'transparent'
             }}
           />
-        ) : (
-          /* Fallback standing / waving pose matching character line style */
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'flex-end',
-              justifyContent: 'center'
-            }}
-          >
-            {/* Grounding paper shadow */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '12px',
-                width: '180px',
-                height: '18px',
-                borderRadius: '50%',
-                background: 'rgba(32, 28, 24, 0.18)',
-                filter: 'blur(4px)'
-              }}
-            />
-            <img
-              src="/assets/character/walk/Timeline 1_00086400.webp"
-              alt="Character greeting"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                display: 'block',
-                position: 'relative',
-                zIndex: 2
-              }}
-            />
-          </div>
-        )}
-
-        {/* Hand-drawn speech bubble pointing to character */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '12%',
-            right: '-15%',
-            pointerEvents: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            transform: 'rotate(2deg)',
-            zIndex: 30
-          }}
-        >
-          <div
-            className="sketch-border"
-            style={{
-              background: '#ffffff',
-              padding: '10px 16px',
-              borderRadius: '16px 16px 16px 2px',
-              boxShadow: 'var(--shadow-paper)',
-              whiteSpace: 'nowrap'
-            }}
-          >
-            <div className="font-hand" style={{ fontSize: 'clamp(1.3rem, 2vw, 1.7rem)', color: 'var(--ink-primary)', fontWeight: 700 }}>
-              Thanks for visiting!
-            </div>
-            <div className="font-hand" style={{ fontSize: 'clamp(1rem, 1.6vw, 1.3rem)', color: 'var(--ink-accent)' }}>
-              See you around! 👋
-            </div>
-          </div>
         </div>
-      </div>
+      )}
 
       {/* Main Closing & Contact Dossier — Positioned cleanly on the right side */}
       <div
         style={{
-          marginLeft: 'auto',
+          marginLeft: 'clamp(36%, 46vw, 52%)',
           maxWidth: '620px',
           width: '100%',
           display: 'flex',

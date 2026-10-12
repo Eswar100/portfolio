@@ -39,12 +39,13 @@ export default function HeroOverlay({ progress }) {
         transition: 'opacity 0.2s ease-out'
       }}
     >
-      {/* Hand-drawn greeting pointing to the character */}
+      {/* Hand-drawn greeting pointing to the character — positioned over the left character zone */}
       <div
         style={{
           position: 'absolute',
-          left: 'clamp(22%, 30vw, 36%)',
-          top: 'clamp(18%, 24vh, 28%)',
+          left: 'clamp(27%, 6vw, 9%)',
+          top: 'clamp(16%, 20vh, 24%)',
+
           pointerEvents: 'none',
           display: 'flex',
           flexDirection: 'column',
@@ -61,10 +62,10 @@ export default function HeroOverlay({ progress }) {
         </svg>
       </div>
 
-      {/* Main Hero Content — Positioned on the right side of the screen */}
+      {/* Main Hero Content — Positioned on the right side with guaranteed character clearance */}
       <div
         style={{
-          marginLeft: 'auto',
+          marginLeft: 'clamp(36%, 46vw, 52%)',
           maxWidth: '680px',
           width: '100%',
           display: 'flex',
