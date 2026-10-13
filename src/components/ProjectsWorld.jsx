@@ -36,13 +36,24 @@ export default function ProjectsWorld({ progress, onSelectProject }) {
   const projects = PORTFOLIO_DATA.projects;
   const projectCount = projects.length;
 
-  // Each bay width (responsive: around 560px on desktop, 420px on tablet, 320px on mobile)
-  const bayWidth = 560;
-  const pillarWidth = 68;
+  // Responsive bay width & geometry
+  const [windowWidth, setWindowWidth] = React.useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1200
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth < 1024;
+  const bayWidth = isMobile ? Math.min(320, windowWidth - 40) : (isTablet ? 420 : 560);
+  const pillarWidth = isMobile ? 36 : 68;
   const totalTrackWidth = (bayWidth + pillarWidth) * projectCount + pillarWidth;
 
   // Calculate horizontal travel distance to progressively reveal all project frames
-  // Leaves comfortable margins at beginning and end
   const maxScrollOffset = Math.max(0, totalTrackWidth - (typeof window !== 'undefined' ? window.innerWidth * 0.75 : 800));
   const trackX = -(localP * maxScrollOffset);
 
@@ -63,6 +74,7 @@ export default function ProjectsWorld({ progress, onSelectProject }) {
     >
       {/* Top Gallery Header & Blueprint Coordinates */}
       <div
+        className="gallery-zone-header"
         style={{
           position: 'absolute',
           top: 'clamp(20px, 7vh, 74px)',
@@ -80,7 +92,7 @@ export default function ProjectsWorld({ progress, onSelectProject }) {
           SYSTEM BLUEPRINTS & PRODUCTION BUILDS
         </span>
         <span className="font-hand" style={{ fontSize: '1.15rem', color: 'var(--ink-accent)' }}>
-          *click any frame to inspect internal architecture
+          *click frame to open live project • inspect for architecture
         </span>
       </div>
 
@@ -165,7 +177,13 @@ export default function ProjectsWorld({ progress, onSelectProject }) {
               {/* The Physical Pencil Frame (Mounted on the Wall) */}
               <div
                 className="interactive"
-                onClick={() => onSelectProject(project)}
+                onClick={() => {
+                  if (project.live) {
+                    window.open(project.live, '_blank', 'noopener,noreferrer');
+                  } else {
+                    onSelectProject(project);
+                  }
+                }}
                 style={{
                   flex: 1,
                   margin: '4px 0 10px',
@@ -196,7 +214,7 @@ export default function ProjectsWorld({ progress, onSelectProject }) {
                   style={{
                     position: 'relative',
                     width: '100%',
-                    height: '210px',
+                    height: isMobile ? '160px' : '210px',
                     background: '#161920',
                     overflow: 'hidden',
                     borderBottom: '1.5px solid var(--ink-primary)'
@@ -296,28 +314,32 @@ export default function ProjectsWorld({ progress, onSelectProject }) {
                     </button>
 
                     <div style={{ display: 'flex', gap: '6px' }}>
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="paper-button interactive"
-                        style={{ padding: '5px 8px', fontSize: '0.72rem' }}
-                        onClick={(e) => e.stopPropagation()}
-                        aria-label="GitHub Repository"
-                      >
-                        <GithubIcon size={13} />
-                      </a>
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="paper-button paper-button-blueprint interactive"
-                        style={{ padding: '5px 8px', fontSize: '0.72rem' }}
-                        onClick={(e) => e.stopPropagation()}
-                        aria-label="Live Demo"
-                      >
-                        <ArrowUpRight size={13} />
-                      </a>
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="paper-button interactive"
+                          style={{ padding: isMobile ? '4px 6px' : '5px 8px', fontSize: '0.72rem' }}
+                          onClick={(e) => e.stopPropagation()}
+                          aria-label="GitHub Repository"
+                        >
+                          <GithubIcon size={13} />
+                        </a>
+                      )}
+                      {project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="paper-button paper-button-blueprint interactive"
+                          style={{ padding: isMobile ? '4px 6px' : '5px 8px', fontSize: '0.72rem' }}
+                          onClick={(e) => e.stopPropagation()}
+                          aria-label="Live Demo"
+                        >
+                          <ArrowUpRight size={13} />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

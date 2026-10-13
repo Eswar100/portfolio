@@ -130,6 +130,7 @@ export default function OpeningLoader({ progress, onEnterWorld }) {
           ===================================================== */}
       {/* Left side: small graph/box + code annotation */}
       <div
+        className="loader-side-annotation"
         style={{
           position: 'absolute',
           top: '32%',
@@ -155,6 +156,7 @@ export default function OpeningLoader({ progress, onEnterWorld }) {
 
       {/* Right side: faint code snippet */}
       <div
+        className="loader-side-annotation"
         style={{
           position: 'absolute',
           top: '30%',

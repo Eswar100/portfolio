@@ -15,12 +15,33 @@ export const PORTFOLIO_DATA = {
     social: {
       github: "https://github.com/Eswar100",
       linkedin: "https://linkedin.com/in/eswar-srinivasan",
-      email: "eswar911@outlook.com",
-      resume: "#resume"
+      email: "eswar911@outlook.com"
     }
   },
 
   projects: [
+    {
+      id: "illvora-interiors",
+      title: "Illvora Interiors",
+      category: "LIVE COMMERCIAL WEBSITE",
+      stack: ["Next.js", "React", "Responsive Web", "SEO Architecture"],
+      tagline: "Live Commercial Web Presence & Interior Design Showcase",
+      image: "/assets/projects/illvora-interiors.png",
+      description: "Designed and developed a live website for Illvora Interiors, an interior design brand. The website is publicly accessible and used by real users, providing an online presence for its interior design services and offerings.",
+      architectureHighlight: "Multi-section production website with interactive design catalog, cost estimation workflow, and customer inquiry integration.",
+      endpoints: [
+        { method: "GET", path: "/", desc: "Homepage & interactive design catalog" },
+        { method: "GET", path: "/#estimate", desc: "Interactive interior cost estimator" },
+        { method: "GET", path: "/#consult", desc: "Consultation booking & contact inquiry" }
+      ],
+      metrics: {
+        status: "Production Live",
+        deployment: "Public Access",
+        platform: "Mobile & Desktop"
+      },
+      live: "https://www.illvorainteriors.com/",
+      accent: "#121316"
+    },
     {
       id: "task-manager",
       title: "Task Manager",

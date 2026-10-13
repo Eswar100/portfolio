@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
-import { Mail, FileText, Check, Copy } from 'lucide-react';
+import { Mail, Check, Copy } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import DeveloperDoodles from './DeveloperDoodles';
 
@@ -223,15 +223,6 @@ export default function FinalWaveWorld({ progress }) {
             {copiedEmail ? <Check size={15} color="var(--ink-primary)" /> : <Copy size={15} />}
             {copiedEmail ? 'COPIED!' : 'COPY EMAIL'}
           </button>
-
-          {/* Resume Download */}
-          <a
-            href={developer.social.resume}
-            className="paper-button interactive"
-            style={{ justifyContent: 'center', borderColor: 'var(--ink-primary)', color: 'var(--ink-primary)' }}
-          >
-            <FileText size={15} /> RESUME PDF
-          </a>
         </div>
 
         {/* Email direct line */}

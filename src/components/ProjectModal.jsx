@@ -245,23 +245,27 @@ export default function ProjectModal({ project, onClose }) {
 
         {/* Action Buttons */}
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', flexWrap: 'wrap' }}>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            className="paper-button interactive"
-          >
-            <GithubIcon size={15} /> VIEW CODE ON GITHUB
-          </a>
-          <a
-            href={project.live}
-            target="_blank"
-            rel="noreferrer"
-            className="paper-button interactive"
-            style={{ borderColor: 'var(--ink-primary)' }}
-          >
-            <ExternalLink size={15} /> LAUNCH DEMO
-          </a>
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="paper-button interactive"
+            >
+              <GithubIcon size={15} /> VIEW CODE ON GITHUB
+            </a>
+          )}
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="paper-button interactive"
+              style={{ borderColor: 'var(--ink-primary)' }}
+            >
+              <ExternalLink size={15} /> {project.id === 'illvora-interiors' ? 'VISIT LIVE WEBSITE' : 'LAUNCH DEMO'}
+            </a>
+          )}
         </div>
       </div>
     </div>

@@ -34,13 +34,25 @@ export default function TechStackWorld({ progress }) {
   const techStack = PORTFOLIO_DATA.techStack;
   const techCount = techStack.length;
 
-  // Bay width for tech items: compact architectural bay (~360px wide)
-  const bayWidth = 360;
-  const pillarWidth = 60;
+  // Responsive bay width for tech items
+  const [windowWidth, setWindowWidth] = React.useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1200
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth < 1024;
+  const bayWidth = isMobile ? Math.min(280, windowWidth - 44) : (isTablet ? 320 : 360);
+  const pillarWidth = isMobile ? 32 : 60;
   const totalTrackWidth = (bayWidth + pillarWidth) * techCount + pillarWidth;
 
   // Progressive horizontal scroll revealing technologies sequentially
-  const maxScrollOffset = Math.max(0, totalTrackWidth - (typeof window !== 'undefined' ? window.innerWidth * 0.75 : 800));
+  const maxScrollOffset = Math.max(0, totalTrackWidth - windowWidth * 0.75);
   const trackX = -(localP * maxScrollOffset);
 
   return (
@@ -60,6 +72,7 @@ export default function TechStackWorld({ progress }) {
     >
       {/* Top Gallery Header Annotation */}
       <div
+        className="gallery-zone-header"
         style={{
           position: 'absolute',
           top: 'clamp(20px, 7vh, 74px)',

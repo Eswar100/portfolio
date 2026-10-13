@@ -1,6 +1,6 @@
 import React from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
-import { Mail, FileText, ArrowDown } from 'lucide-react';
+import { Mail, ArrowDown } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import DeveloperDoodles from './DeveloperDoodles';
 
@@ -191,7 +191,7 @@ export default function HeroOverlay({ progress }) {
           {developer.headline}
         </p>
 
-        {/* Hero Quick Connect Links: GitHub, LinkedIn, Resume, Email */}
+        {/* Hero Quick Connect Links: GitHub, LinkedIn, Email */}
         <div
           style={{
             display: 'flex',
@@ -217,13 +217,6 @@ export default function HeroOverlay({ progress }) {
             style={{ padding: '7px 14px', fontSize: '0.78rem' }}
           >
             <LinkedinIcon size={14} /> LINKEDIN
-          </a>
-          <a
-            href={developer.social.resume}
-            className="paper-button interactive"
-            style={{ padding: '7px 14px', fontSize: '0.78rem' }}
-          >
-            <FileText size={14} /> RESUME
           </a>
           <a
             href={`mailto:${developer.social.email}`}
