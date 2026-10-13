@@ -6,7 +6,6 @@ import { frameManager } from '../services/CharacterFrameManager';
  * Loading & Initialization experience matching the user's reference drawing.
  * 
  * Framing & Features:
- * - Top-left: ■ ESWAR // DEV
  * - Bottom-right: ● ESWAR.RUNTIME / BOOT SEQUENCE
  * - Center (over chin/neck): 3-digit percentage, status, and thin progress bar
  * - Sides: faint graphite pencil code snippets & architectural sketch marks
@@ -83,7 +82,7 @@ export default function OpeningLoader({ progress, onEnterWorld }) {
       }}
     >
       {/* =====================================================
-          TOP BAR (Reference Image: ■ ESWAR // DEV)
+          TOP BAR
           ===================================================== */}
       <div
         style={{
@@ -93,22 +92,7 @@ export default function OpeningLoader({ progress, onEnterWorld }) {
         }}
       >
         {/* TOP LEFT */}
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            border: '1px solid var(--paper-border)',
-            background: 'rgba(255, 255, 255, 0.92)',
-            padding: '5px 12px',
-            boxShadow: 'var(--shadow-paper)'
-          }}
-        >
-          <div style={{ width: '8px', height: '8px', background: 'var(--ink-primary)' }} />
-          <span className="font-mono" style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--ink-primary)' }}>
-            ESWAR // DEV
-          </span>
-        </div>
+        <div />
 
         {/* TOP RIGHT TELEMETRY */}
         <div
