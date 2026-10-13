@@ -26,22 +26,24 @@ export default function FloatingNav({ progress, onNavigate }) {
 
   return (
     <nav
+      className="floating-nav-container"
       style={{
         position: 'fixed',
-        top: 'clamp(14px, 2.5vh, 24px)',
+        top: 'clamp(10px, 1.8vh, 18px)',
         left: 0,
-        width: '100vw',
-        padding: '0 clamp(16px, 4vw, 40px)',
+        width: '100%',
+        padding: '0 clamp(12px, 3.5vw, 40px)',
         zIndex: 60,
         pointerEvents: 'none',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        boxSizing: 'border-box'
       }}
     >
       {/* Brand Identity / Home trigger */}
       <div
-        className="interactive"
+        className="interactive nav-brand"
         onClick={() => onNavigate(0)}
         style={{
           pointerEvents: 'auto',
@@ -107,6 +109,7 @@ export default function FloatingNav({ progress, onNavigate }) {
 
       {/* Right controls: Sound & Progress */}
       <div
+        className="nav-controls"
         style={{
           pointerEvents: 'auto',
           display: 'flex',
@@ -117,7 +120,7 @@ export default function FloatingNav({ progress, onNavigate }) {
         {/* Sound toggle button */}
         <button
           onClick={handleToggleSound}
-          className="interactive"
+          className="interactive nav-sound-btn"
           style={{
             background: 'rgba(255, 255, 255, 0.92)',
             border: '1px solid var(--paper-border)',
@@ -140,6 +143,7 @@ export default function FloatingNav({ progress, onNavigate }) {
 
         {/* Master Progress Indicator */}
         <div
+          className="nav-progress-badge"
           style={{
             background: 'rgba(255, 255, 255, 0.92)',
             border: '1px solid var(--paper-border)',
@@ -156,6 +160,7 @@ export default function FloatingNav({ progress, onNavigate }) {
         >
           <span>{pct}%</span>
           <div
+            className="nav-progress-bar-track"
             style={{
               width: '42px',
               height: '3px',

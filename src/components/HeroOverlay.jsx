@@ -24,18 +24,18 @@ export default function HeroOverlay({ progress }) {
 
   return (
     <div
+      className="hero-overlay-root"
       style={{
         position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
+        inset: 0,
         pointerEvents: opacity > 0.5 ? 'auto' : 'none',
         opacity,
         zIndex: 25,
         display: 'flex',
         alignItems: 'center',
-        padding: 'clamp(20px, 6vw, 80px)',
+        padding: 'clamp(20px, 5vw, 60px)',
+        paddingTop: 'clamp(65px, 8.5vh, 90px)',
+        boxSizing: 'border-box',
         transform: `translateY(${translateY}px)`,
         transition: 'opacity 0.2s ease-out'
       }}
@@ -45,15 +45,16 @@ export default function HeroOverlay({ progress }) {
 
       {/* Hand-drawn greeting pointing to the character */}
       <div
+        className="hero-speech-bubble"
         style={{
           position: 'absolute',
-          left: 'clamp(4%, 12vw, 20%)',
-          top: '12%',
+          left: 'clamp(400px, 18vw, 20vw)',
+          top: 'clamp(60px, 9vh, 105px)',
+          transform: 'translateX(-50%) rotate(-3deg)',
           pointerEvents: 'none',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          transform: 'rotate(-3deg)',
           zIndex: 28
         }}
       >
@@ -72,7 +73,7 @@ export default function HeroOverlay({ progress }) {
           </span>
         </div>
         {/* Dashed arrow pointing down toward character body */}
-        <svg width="35" height="42" viewBox="0 0 35 42" fill="none" style={{ marginLeft: '20px', marginTop: '4px', opacity: 0.7 }}>
+        <svg width="35" height="42" viewBox="0 0 35 42" fill="none" style={{ marginLeft: '10px', marginTop: '4px', opacity: 0.7 }}>
           <path d="M16 2 C 22 16, 18 24, 8 38" stroke="var(--ink-primary)" strokeWidth="1.6" strokeLinecap="round" strokeDasharray="3 3" />
           <path d="M8 38 L 16 34 M 8 38 L 7 26" stroke="var(--ink-primary)" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
@@ -83,12 +84,13 @@ export default function HeroOverlay({ progress }) {
         id="hero-character-slot"
         style={{
           position: 'absolute',
-          left: 'clamp(4%, 12vw, 20%)',
-          bottom: '8vh',
-          width: 'clamp(260px, 30vw, 440px)',
-          height: '68vh',
+          left: 'clamp(70px, 18vw, 20vw)',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'clamp(120px, 18vw, 300px)',
+          height: 'clamp(260px, 52vh, 540px)',
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: 'center',
           justifyContent: 'center',
           pointerEvents: 'none',
           zIndex: 26,
@@ -99,9 +101,10 @@ export default function HeroOverlay({ progress }) {
           src="/assets/character/wave.png"
           alt="Eswar waving"
           style={{
-            maxWidth: '100%',
-            height: 'auto',
-            maxHeight: '100%',
+            height: '64.8vh',
+            width: 'auto',
+            maxWidth: 'none',
+            maxHeight: 'none',
             objectFit: 'contain',
             filter: 'grayscale(100%) drop-shadow(2px 6px 14px rgba(0,0,0,0.12))',
             display: 'block'
@@ -111,6 +114,7 @@ export default function HeroOverlay({ progress }) {
 
       {/* Main Hero Content — Positioned on the right side with guaranteed character clearance */}
       <div
+        className="hero-content-column"
         style={{
           marginLeft: 'clamp(36%, 46vw, 52%)',
           maxWidth: '680px',
@@ -118,7 +122,7 @@ export default function HeroOverlay({ progress }) {
           display: 'flex',
           flexDirection: 'column',
           gap: '16px',
-          zIndex: 26
+          zIndex: 30
         }}
       >
         {/* Editorial Subtitle / Role Tag */}

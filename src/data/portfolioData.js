@@ -13,9 +13,9 @@ export const PORTFOLIO_DATA = {
       { label: "SYSTEM RUNTIME", value: "Linux / JVM Engine" }
     ],
     social: {
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-      email: "eswar.dev@outlook.com",
+      github: "https://github.com/Eswar100",
+      linkedin: "https://linkedin.com/in/eswar-srinivasan",
+      email: "eswar911@outlook.com",
       resume: "#resume"
     }
   },

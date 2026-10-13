@@ -62,7 +62,7 @@ export default function TechStackWorld({ progress }) {
       <div
         style={{
           position: 'absolute',
-          top: 'clamp(16px, 3vh, 32px)',
+          top: 'clamp(20px, 7vh, 74px)',
           left: 'clamp(20px, 4vw, 50px)',
           display: 'flex',
           alignItems: 'center',

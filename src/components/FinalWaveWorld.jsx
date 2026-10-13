@@ -36,6 +36,7 @@ export default function FinalWaveWorld({ progress }) {
 
   return (
     <div
+      className="final-world-root"
       style={{
         position: 'fixed',
         inset: 0,
@@ -44,7 +45,9 @@ export default function FinalWaveWorld({ progress }) {
         zIndex: 25,
         display: 'flex',
         alignItems: 'center',
-        padding: 'clamp(20px, 6vw, 80px)',
+        padding: 'clamp(20px, 5vw, 60px)',
+        paddingTop: 'clamp(65px, 8.5vh, 90px)',
+        boxSizing: 'border-box',
         overflow: 'hidden',
         transition: 'opacity 0.2s ease-out'
       }}
@@ -57,16 +60,18 @@ export default function FinalWaveWorld({ progress }) {
           ========================================================
       */}
       <div
+        className="final-speech-bubble"
         style={{
           position: 'absolute',
-          left: 'clamp(4%, 12vw, 20%)',
-          top: '12%',
+          left: 'clamp(70px, 18vw, 20vw)',
+          top: 'clamp(60px, 9vh, 105px)',
+          transform: 'translateX(-50%)',
           pointerEvents: 'none',
           zIndex: 28,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          gap: '12px'
+          gap: '8px'
         }}
       >
         {/* Speech bubble */}
@@ -78,7 +83,7 @@ export default function FinalWaveWorld({ progress }) {
             borderRadius: '16px 16px 16px 2px',
             boxShadow: 'var(--shadow-paper)',
             whiteSpace: 'nowrap',
-            transform: 'rotate(2deg)'
+            transform: 'translateX(165px) rotate(2deg)'
           }}
         >
           <div className="font-hand" style={{ fontSize: 'clamp(1.3rem, 2vw, 1.7rem)', color: 'var(--ink-primary)', fontWeight: 700 }}>
@@ -89,7 +94,7 @@ export default function FinalWaveWorld({ progress }) {
           </div>
         </div>
         {/* Dashed arrow pointing down toward the character body */}
-        <svg width="30" height="40" viewBox="0 0 30 40" fill="none" style={{ marginLeft: '20px', opacity: 0.6 }}>
+        <svg width="30" height="40" viewBox="0 0 30 40" fill="none" style={{ marginLeft: '170px', opacity: 0.6 }}>
           <path d="M15 0 C 10 15, 20 25, 8 38" stroke="var(--ink-primary)" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
           <path d="M8 38 L 14 34 M 8 38 L 6 30" stroke="var(--ink-primary)" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
@@ -100,12 +105,13 @@ export default function FinalWaveWorld({ progress }) {
         id="final-character-slot"
         style={{
           position: 'absolute',
-          left: 'clamp(4%, 12vw, 20%)',
-          bottom: '8vh',
-          width: 'clamp(260px, 30vw, 440px)',
-          height: '68vh',
+          left: 'clamp(70px, 18vw, 20vw)',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'clamp(120px, 18vw, 300px)',
+          height: 'clamp(260px, 52vh, 540px)',
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: 'center',
           justifyContent: 'center',
           pointerEvents: 'none',
           zIndex: 26,
@@ -117,8 +123,8 @@ export default function FinalWaveWorld({ progress }) {
           alt="Eswar waving"
           style={{
             maxWidth: '100%',
-            height: 'auto',
-            maxHeight: '100%',
+            height: '64.8vh',
+            maxHeight: 'none',
             objectFit: 'contain',
             filter: 'grayscale(100%) drop-shadow(2px 6px 14px rgba(0,0,0,0.12))',
             display: 'block'
@@ -128,6 +134,7 @@ export default function FinalWaveWorld({ progress }) {
 
       {/* Main Closing & Contact Dossier — Positioned cleanly on the right side */}
       <div
+        className="final-content-column"
         style={{
           marginLeft: 'clamp(36%, 46vw, 52%)',
           maxWidth: '620px',
@@ -135,7 +142,7 @@ export default function FinalWaveWorld({ progress }) {
           display: 'flex',
           flexDirection: 'column',
           gap: '18px',
-          zIndex: 28
+          zIndex: 30
         }}
       >
         {/* Runtime Exit Banner */}
