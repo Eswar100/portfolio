@@ -3,6 +3,7 @@ import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { Mail, ArrowDown } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import DeveloperDoodles from './DeveloperDoodles';
+import { getAssetUrl } from '../utils/assetHelper';
 
 export default function HeroOverlay({ progress }) {
   // Fade in as camera pulls back (from 0.06 to 0.08) and stay visible until transition 1 (around 0.18)
@@ -98,7 +99,7 @@ export default function HeroOverlay({ progress }) {
         }}
       >
         <img
-          src="/assets/character/wave.png"
+          src={getAssetUrl('assets/character/wave.png')}
           alt="Eswar waving"
           style={{
             height: '64.8vh',

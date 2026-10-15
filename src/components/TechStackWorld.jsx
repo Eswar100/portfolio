@@ -1,6 +1,7 @@
 import React from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import ArchitecturalPillar from './ArchitecturalPillar';
+import { getAssetUrl } from '../utils/assetHelper';
 
 /**
  * TechStackWorld
@@ -216,7 +217,7 @@ export default function TechStackWorld({ progress }) {
                   }}
                 >
                   <img
-                    src={tech.logo}
+                    src={getAssetUrl(tech.logo)}
                     alt={`${tech.name} logo`}
                     style={{
                       maxWidth: '100%',

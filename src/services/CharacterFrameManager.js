@@ -9,25 +9,27 @@
  * - Sequence progress tracking & event subscriptions
  */
 
+import { getAssetUrl } from '../utils/assetHelper';
+
 class CharacterFrameManager {
   constructor() {
     this.sequences = {
       fallLand: {
-        folder: '/assets/character/fall-land',
+        folder: getAssetUrl('assets/character/fall-land'),
         count: 76,
         prefix: 'Timeline 1_000864',
         cache: new Map(),
         loadedCount: 0
       },
       walk: {
-        folder: '/assets/character/walk',
+        folder: getAssetUrl('assets/character/walk'),
         count: 116,
         prefix: 'Timeline 1_000864',
         cache: new Map(),
         loadedCount: 0
       },
       wave: {
-        folder: '/assets/character/wave',
+        folder: getAssetUrl('assets/character/wave'),
         count: 120,
         prefix: 'Timeline 1_000864',
         cache: new Map(),
@@ -48,7 +50,8 @@ class CharacterFrameManager {
     const clampedIndex = Math.max(0, Math.min(seq.count - 1, Math.floor(index)));
     const frameNumber = 86400 + clampedIndex;
     const formattedNum = String(frameNumber).padStart(8, '0');
-    return `${seq.folder}/Timeline 1_${formattedNum}.webp`;
+    const folder = seq.folder.endsWith('/') ? seq.folder.slice(0, -1) : seq.folder;
+    return getAssetUrl(`${folder}/Timeline 1_${formattedNum}.webp`);
   }
 
   loadSingleImage(url) {

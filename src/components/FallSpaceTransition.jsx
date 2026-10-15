@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAssetUrl } from '../utils/assetHelper';
 
 /**
  * FallSpaceTransition
@@ -18,15 +19,15 @@ const TRANSITION_CONFIGS = {
     { id: 'arrow-down-1', type: 'arrow', x: 15, y: 70, speed: 0.6, layer: 'background' },
 
     // Distant Asteroid PNGs (Layer 3 - smaller, slower, behind character)
-    { id: 'ast-dist-2', type: 'asteroid', src: '/assets/character/doodles/astroid2.png', x: 12, y: 28, scale: 0.55, speed: 0.3, layer: 'distant', rot: 15 },
-    { id: 'ast-dist-5', type: 'asteroid', src: '/assets/character/doodles/astroid5.png', x: 88, y: 38, scale: 0.6, speed: 0.45, layer: 'distant', rot: -25 },
+    { id: 'ast-dist-2', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid2.png'), x: 12, y: 28, scale: 0.55, speed: 0.3, layer: 'distant', rot: 15 },
+    { id: 'ast-dist-5', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid5.png'), x: 88, y: 38, scale: 0.6, speed: 0.45, layer: 'distant', rot: -25 },
 
     // Distant Satellite PNG (Layer 4 - independent horizontal & vertical drift)
-    { id: 'sat-main', type: 'satellite', src: '/assets/character/doodles/satellite.png', x: 78, y: 22, scale: 0.8, speedX: -0.5, speedY: 0.28, layer: 'distant', rot: 8 },
+    { id: 'sat-main', type: 'satellite', src: getAssetUrl('assets/character/doodles/satellite.png'), x: 78, y: 22, scale: 0.8, speedX: -0.5, speedY: 0.28, layer: 'distant', rot: 8 },
 
     // Midground Asteroids (Layer 5 - larger, faster, positioned to the sides so character remains hero)
-    { id: 'ast-mid-1', type: 'asteroid', src: '/assets/character/doodles/astroid1.png', x: 8, y: 65, scale: 0.85, speed: 0.75, layer: 'midground', rot: 40 },
-    { id: 'ast-mid-4', type: 'asteroid', src: '/assets/character/doodles/astroid4.png', x: 85, y: 72, scale: 0.9, speed: 0.85, layer: 'midground', rot: -15 },
+    { id: 'ast-mid-1', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid1.png'), x: 8, y: 65, scale: 0.85, speed: 0.75, layer: 'midground', rot: 40 },
+    { id: 'ast-mid-4', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid4.png'), x: 85, y: 72, scale: 0.9, speed: 0.85, layer: 'midground', rot: -15 },
 
     // Floating particles & space debris (Layer 5)
     { id: 'part-1', type: 'particle', x: 28, y: 40, size: 4, speed: 0.5, layer: 'midground' },
@@ -47,14 +48,14 @@ const TRANSITION_CONFIGS = {
     { id: 'tech-cross-2', type: 'technical', subtype: 'crosshair', x: 80, y: 25, speed: 0.25, layer: 'background', label: 'ALT: 4200M // TRANSIENT' },
     { id: 'tech-gravity-2', type: 'technical', subtype: 'gravity-vector', x: 14, y: 55, speed: 0.45, layer: 'background', label: 'V_REL: -24.0 m/s' },
 
-    { id: 'ast-dist-3', type: 'asteroid', src: '/assets/character/doodles/astroid3.png', x: 82, y: 25, scale: 0.6, speed: 0.35, layer: 'distant', rot: 35 },
-    { id: 'ast-dist-1', type: 'asteroid', src: '/assets/character/doodles/astroid1.png', x: 16, y: 40, scale: 0.5, speed: 0.4, layer: 'distant', rot: -20 },
+    { id: 'ast-dist-3', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid3.png'), x: 82, y: 25, scale: 0.6, speed: 0.35, layer: 'distant', rot: 35 },
+    { id: 'ast-dist-1', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid1.png'), x: 16, y: 40, scale: 0.5, speed: 0.4, layer: 'distant', rot: -20 },
 
     // Satellite drifting across from left
-    { id: 'sat-2', type: 'satellite', src: '/assets/character/doodles/satellite.png', x: 15, y: 20, scale: 0.75, speedX: 0.4, speedY: 0.3, layer: 'distant', rot: -12 },
+    { id: 'sat-2', type: 'satellite', src: getAssetUrl('assets/character/doodles/satellite.png'), x: 15, y: 20, scale: 0.75, speedX: 0.4, speedY: 0.3, layer: 'distant', rot: -12 },
 
-    { id: 'ast-mid-2', type: 'asteroid', src: '/assets/character/doodles/astroid2.png', x: 86, y: 62, scale: 0.95, speed: 0.8, layer: 'midground', rot: 50 },
-    { id: 'ast-mid-5', type: 'asteroid', src: '/assets/character/doodles/astroid5.png', x: 10, y: 70, scale: 0.85, speed: 0.9, layer: 'midground', rot: -40 },
+    { id: 'ast-mid-2', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid2.png'), x: 86, y: 62, scale: 0.95, speed: 0.8, layer: 'midground', rot: 50 },
+    { id: 'ast-mid-5', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid5.png'), x: 10, y: 70, scale: 0.85, speed: 0.9, layer: 'midground', rot: -40 },
 
     { id: 'part-2-1', type: 'particle', x: 22, y: 35, size: 5, speed: 0.6, layer: 'midground' },
     { id: 'part-2-2', type: 'particle', x: 78, y: 65, size: 4, speed: 0.5, layer: 'midground' },
@@ -70,12 +71,12 @@ const TRANSITION_CONFIGS = {
     { id: 'tech-cross-3', type: 'technical', subtype: 'crosshair', x: 75, y: 35, speed: 0.25, layer: 'background', label: 'FINAL DESCENT // BASE REACHED' },
     { id: 'tech-gravity-3', type: 'technical', subtype: 'gravity-vector', x: 20, y: 65, speed: 0.4, layer: 'background', label: 'DECELERATING -> TOUCHDOWN' },
 
-    { id: 'ast-dist-4', type: 'asteroid', src: '/assets/character/doodles/astroid4.png', x: 14, y: 26, scale: 0.55, speed: 0.35, layer: 'distant', rot: 10 },
-    { id: 'ast-dist-2b', type: 'asteroid', src: '/assets/character/doodles/astroid2.png', x: 85, y: 32, scale: 0.5, speed: 0.3, layer: 'distant', rot: -15 },
+    { id: 'ast-dist-4', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid4.png'), x: 14, y: 26, scale: 0.55, speed: 0.35, layer: 'distant', rot: 10 },
+    { id: 'ast-dist-2b', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid2.png'), x: 85, y: 32, scale: 0.5, speed: 0.3, layer: 'distant', rot: -15 },
 
-    { id: 'sat-3', type: 'satellite', src: '/assets/character/doodles/satellite.png', x: 68, y: 18, scale: 0.7, speedX: -0.35, speedY: 0.25, layer: 'distant', rot: 14 },
+    { id: 'sat-3', type: 'satellite', src: getAssetUrl('assets/character/doodles/satellite.png'), x: 68, y: 18, scale: 0.7, speedX: -0.35, speedY: 0.25, layer: 'distant', rot: 14 },
 
-    { id: 'ast-mid-3', type: 'asteroid', src: '/assets/character/doodles/astroid3.png', x: 88, y: 68, scale: 0.9, speed: 0.85, layer: 'midground', rot: -30 },
+    { id: 'ast-mid-3', type: 'asteroid', src: getAssetUrl('assets/character/doodles/astroid3.png'), x: 88, y: 68, scale: 0.9, speed: 0.85, layer: 'midground', rot: -30 },
 
     { id: 'part-3-1', type: 'particle', x: 25, y: 50, size: 5, speed: 0.5, layer: 'midground' },
     { id: 'part-3-2', type: 'particle', x: 72, y: 60, size: 4, speed: 0.6, layer: 'midground' },
@@ -172,7 +173,7 @@ export default function FallSpaceTransition({
               }}
             >
               <img
-                src={obj.src}
+                src={getAssetUrl(obj.src)}
                 alt="Asteroid sketch"
                 style={{
                   display: 'block',
@@ -201,7 +202,7 @@ export default function FallSpaceTransition({
               }}
             >
               <img
-                src={obj.src}
+                src={getAssetUrl(obj.src)}
                 alt="Satellite sketch"
                 style={{
                   display: 'block',

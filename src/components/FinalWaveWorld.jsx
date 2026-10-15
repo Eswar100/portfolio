@@ -3,6 +3,7 @@ import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { Mail, Check, Copy } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import DeveloperDoodles from './DeveloperDoodles';
+import { getAssetUrl } from '../utils/assetHelper';
 
 /**
  * FinalWaveWorld
@@ -119,7 +120,7 @@ export default function FinalWaveWorld({ progress }) {
         }}
       >
         <img
-          src="/assets/character/wave.png"
+          src={getAssetUrl('assets/character/wave.png')}
           alt="Eswar waving"
           style={{
             maxWidth: '100%',

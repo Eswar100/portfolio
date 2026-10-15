@@ -1,3 +1,5 @@
+import { getAssetUrl } from '../utils/assetHelper';
+
 export const PORTFOLIO_DATA = {
   developer: {
     name: "ESWAR",
@@ -26,7 +28,7 @@ export const PORTFOLIO_DATA = {
       category: "LIVE COMMERCIAL WEBSITE",
       stack: ["Next.js", "React", "Responsive Web", "SEO Architecture"],
       tagline: "Live Commercial Web Presence & Interior Design Showcase",
-      image: "/assets/projects/illvora-interiors.png",
+      image: getAssetUrl('assets/projects/illvora-interiors.png'),
       description: "Designed and developed a live website for Illvora Interiors, an interior design brand. The website is publicly accessible and used by real users, providing an online presence for its interior design services and offerings.",
       architectureHighlight: "Multi-section production website with interactive design catalog, cost estimation workflow, and customer inquiry integration.",
       endpoints: [
@@ -48,7 +50,7 @@ export const PORTFOLIO_DATA = {
       category: "ENTERPRISE REST SERVICE",
       stack: ["Spring Boot", "REST API", "MySQL", "CRUD", "JPA/Hibernate"],
       tagline: "Scalable Task Orchestration & Management Engine",
-      image: "/assets/projects/task-manager.png",
+      image: getAssetUrl('assets/projects/task-manager.png'),
       description: "A production-grade RESTful web service architected with Spring Boot and MySQL. Implements layered architecture, comprehensive CRUD operations, DTO validation, and automated transaction rollback handling.",
       architectureHighlight: "Layered Spring MVC with Hibernate second-level caching & HikariCP connection pooling.",
       endpoints: [
@@ -72,7 +74,7 @@ export const PORTFOLIO_DATA = {
       category: "FINANCIAL TRANSACTION ENGINE",
       stack: ["Java", "OOP", "Database-Driven", "Transactions", "ACID Compliance"],
       tagline: "High-Integrity Core Ledger & Account Transfer Platform",
-      image: "/assets/projects/banking-system.png",
+      image: getAssetUrl('assets/projects/banking-system.png'),
       description: "A secure, database-driven financial application built on pure Object-Oriented principles in Java. Features strict ACID transaction isolation levels, ledger reconciliation, thread-safe concurrent account debits/credits, and cryptographic password hashing.",
       architectureHighlight: "Optimistic locking with row-level mutex locks preventing race conditions in high-throughput transfer queues.",
       endpoints: [
@@ -95,7 +97,7 @@ export const PORTFOLIO_DATA = {
       category: "MODERN WEB UTILITY SUITE",
       stack: ["Next.js", "TypeScript", "Web Utilities", "SEO", "Tailored API"],
       tagline: "High-Performance Content Tools & Developer Utilities",
-      image: "/assets/projects/youmate.png",
+      image: getAssetUrl('assets/projects/youmate.png'),
       description: "A fast, SEO-optimized web application built with Next.js and TypeScript. Delivers intuitive utilities with server-side rendering, sub-second TTFB, dynamic OpenGraph card generation, and streamlined workflow automation.",
       architectureHighlight: "Edge server caching with incremental static regeneration (ISR) and strict TypeScript type boundaries.",
       endpoints: [
@@ -118,7 +120,7 @@ export const PORTFOLIO_DATA = {
       name: "JAVA",
       category: "CORE RUNTIME",
       version: "Java 17 / 21 LTS",
-      logo: "/assets/tech/java.svg",
+      logo: getAssetUrl('assets/tech/java.svg'),
       details: "OOP, Streams API, Concurrency, JVM Internals, Garbage Collection tuning",
       annotation: "public static void main(String[] args)"
     },
@@ -126,7 +128,7 @@ export const PORTFOLIO_DATA = {
       name: "SPRING BOOT",
       category: "FRAMEWORK",
       version: "Spring Boot 3.x",
-      logo: "/assets/tech/springboot.svg",
+      logo: getAssetUrl('assets/tech/springboot.svg'),
       details: "REST APIs, Spring Data JPA, Spring Security, IoC & Dependency Injection",
       annotation: "@SpringBootApplication"
     },
@@ -134,7 +136,7 @@ export const PORTFOLIO_DATA = {
       name: "MYSQL",
       category: "RELATIONAL DATABASE",
       version: "MySQL 8.0 / InnoDB",
-      logo: "/assets/tech/mysql.svg",
+      logo: getAssetUrl('assets/tech/mysql.svg'),
       details: "Schema normalization, indexing strategies, complex JOINs, ACID transactions",
       annotation: "SELECT * FROM sys.performance_schema"
     },
@@ -142,7 +144,7 @@ export const PORTFOLIO_DATA = {
       name: "PYTHON",
       category: "SCRIPTING & DATA",
       version: "Python 3.11+",
-      logo: "/assets/tech/python.svg",
+      logo: getAssetUrl('assets/tech/python.svg'),
       details: "Automation, data scripts, backend utilities, microservices & async APIs",
       annotation: "def handle_transaction(ctx):"
     },
@@ -150,7 +152,7 @@ export const PORTFOLIO_DATA = {
       name: "LINUX",
       category: "OPERATING SYSTEM",
       version: "Ubuntu / Debian / RHEL",
-      logo: "/assets/tech/linux.svg",
+      logo: getAssetUrl('assets/tech/linux.svg'),
       details: "Shell scripting (Bash), systemd services, process monitoring, file permissions",
       annotation: "$ sudo systemctl status eswar-backend"
     },
@@ -158,7 +160,7 @@ export const PORTFOLIO_DATA = {
       name: "GIT",
       category: "VERSION CONTROL",
       version: "Git CLI & Workflows",
-      logo: "/assets/tech/git.svg",
+      logo: getAssetUrl('assets/tech/git.svg'),
       details: "Feature branching, rebase workflows, semantic commits, PR code reviews",
       annotation: "git commit -m 'feat: scalable backend pipeline'"
     },
@@ -166,7 +168,7 @@ export const PORTFOLIO_DATA = {
       name: "DOCKER & CLOUD",
       category: "INFRASTRUCTURE",
       version: "Docker / AWS Containers",
-      logo: "/assets/tech/docker.svg",
+      logo: getAssetUrl('assets/tech/docker.svg'),
       details: "Containerization, multi-stage builds, cloud deployments, CI/CD pipelines",
       annotation: "docker run -p 8080:8080 eswar/api"
     },
@@ -174,7 +176,7 @@ export const PORTFOLIO_DATA = {
       name: "REST API",
       category: "API DESIGN",
       version: "OpenAPI / Swagger 3.0",
-      logo: "/assets/tech/restapi.svg",
+      logo: getAssetUrl('assets/tech/restapi.svg'),
       details: "Idempotent HTTP verbs, RESTful resource naming, status codes, JSON schemas",
       annotation: "Content-Type: application/json"
     }

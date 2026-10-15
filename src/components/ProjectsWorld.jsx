@@ -3,6 +3,7 @@ import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { Layers, ArrowUpRight } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import ArchitecturalPillar from './ArchitecturalPillar';
+import { getAssetUrl } from '../utils/assetHelper';
 
 /**
  * ProjectsWorld
@@ -221,7 +222,7 @@ export default function ProjectsWorld({ progress, onSelectProject }) {
                   }}
                 >
                   <img
-                    src={project.image}
+                    src={getAssetUrl(project.image)}
                     alt={project.title}
                     style={{
                       width: '100%',
